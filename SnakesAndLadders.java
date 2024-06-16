@@ -2,9 +2,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Main {
+public class SnakesAndLadders {
 
   public static void main(String[] args) {
+    new SnakesAndLadders().run();
+  }
+
+  private void run() {
     //declare variables
     String[][] board = new String[10][10];
     Map<Integer, Integer> snakePositions = new HashMap<Integer, Integer>() {
@@ -202,7 +206,6 @@ public class Main {
       }
 
     }
-
   }
 
   //throw number at random
