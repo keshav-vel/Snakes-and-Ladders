@@ -6,8 +6,8 @@ public class Main {
 
   public static void main(String[] args) {
     //declare variables
-    String[][] brd = new String[10][10];
-    Map<Integer, Integer> snkPos = new HashMap<Integer, Integer>() {
+    String[][] board = new String[10][10];
+    Map<Integer, Integer> snakePositions = new HashMap<Integer, Integer>() {
       {
         put(18, 2);
         put(25, 8);
@@ -21,7 +21,7 @@ public class Main {
         put(97, 5);
       }
     };
-    Map<Integer, Integer> ldrPos = new HashMap<Integer, Integer>() {
+    Map<Integer, Integer> ladderPositions = new HashMap<Integer, Integer>() {
       {
         put(9, 32);
         put(12, 53);
@@ -33,23 +33,23 @@ public class Main {
         put(63, 88);
       }
     };
-    int player = 1;
-    int onePos = 0, twoPos = 0, threePos = 0, fourPos = 0;
-    boolean skip = false;
+    int playerTurn = 1;
+    int playerOnePosition = 0, playerTwoPosition = 0, playerThreePosition = 0, playerFourPosition = 0;
+    boolean skipTurn = false;
 
 
     //continue to play the game until it is over
     while (true) {
 
       int nextNum = getNumber();
-      System.out.println("Player " + player + " got dice roll of " + nextNum);
+      System.out.println("Player " + playerTurn + " got dice roll of " + nextNum);
 
-      if (player == 1) {
-        int next = onePos + nextNum;
+      if (playerTurn == 1) {
+        int next = playerOnePosition + nextNum;
 
         if (next > 100) {
-          System.out.println("Player one needs to score exactly " + (100 - onePos) + " on dice roll to win. Passing chance.");
-          skip = true;
+          System.out.println("Player one needs to score exactly " + (100 - playerOnePosition) + " on dice roll to win. Passing chance.");
+          skipTurn = true;
         }
 
         if (next == 100) {
@@ -57,39 +57,39 @@ public class Main {
           System.exit(1);
         }
 
-        if (onePos == 0 && nextNum != 6) {
+        if (playerOnePosition == 0 && nextNum != 6) {
           System.out.println("Player one did not score 6. First a 6 needs to be scored to start moving on board.");
-          skip = true;
+          skipTurn = true;
         }
 
-        if (snkPos.get(next) != null) {
+        if (snakePositions.get(next) != null) {
           System.out.println("Player got bit by snake a position " + next);
-          onePos = snkPos.get(next);
-          skip = true;
+          playerOnePosition = snakePositions.get(next);
+          skipTurn = true;
         }
 
-        if (ldrPos.get(next) != null) {
+        if (ladderPositions.get(next) != null) {
           System.out.println("Player got chanced upon a ladder at position " + next + "!");
-          onePos = ldrPos.get(next);
-          skip = true;
+          playerOnePosition = ladderPositions.get(next);
+          skipTurn = true;
         }
 
-        if (!skip) {
-          onePos = next;
+        if (!skipTurn) {
+          playerOnePosition = next;
         }
 
-        System.out.println("Next position for player one is " + onePos);
-        skip = false;
-        player = 2;
+        System.out.println("Next position for player one is " + playerOnePosition);
+        skipTurn = false;
+        playerTurn = 2;
         System.out.println("Player two will play next turn");
 
-      } else if (player == 2) {
+      } else if (playerTurn == 2) {
 
-        int next = twoPos + nextNum;
+        int next = playerTwoPosition + nextNum;
 
         if (next > 100) {
-          System.out.println("Player two needs to score exactly " + (100 - twoPos) + " on dice roll to win. Passing chance.");
-          skip = true;
+          System.out.println("Player two needs to score exactly " + (100 - playerTwoPosition) + " on dice roll to win. Passing chance.");
+          skipTurn = true;
         }
 
         if (next == 100) {
@@ -97,38 +97,38 @@ public class Main {
           System.exit(1);
         }
 
-        if (twoPos == 0 && nextNum != 6) {
+        if (playerTwoPosition == 0 && nextNum != 6) {
           System.out.println("Player two did not score 6. First a 6 needs to be scored to start moving on board.");
-          skip = true;
+          skipTurn = true;
         }
 
-        if (snkPos.get(next) != null) {
+        if (snakePositions.get(next) != null) {
           System.out.println("Player got bit by snake a position " + next);
-          twoPos = snkPos.get(next);
-          skip = true;
+          playerTwoPosition = snakePositions.get(next);
+          skipTurn = true;
         }
 
-        if (ldrPos.get(next) != null) {
+        if (ladderPositions.get(next) != null) {
           System.out.println("Player got chanced upon a ladder at position " + next + "!");
-          twoPos = ldrPos.get(next);
-          skip = true;
+          playerTwoPosition = ladderPositions.get(next);
+          skipTurn = true;
         }
 
-        if (!skip) {
-          twoPos = next;
+        if (!skipTurn) {
+          playerTwoPosition = next;
         }
-        System.out.println("Next position for player two is " + twoPos);
-        skip = false;
-        player = 3;
+        System.out.println("Next position for player two is " + playerTwoPosition);
+        skipTurn = false;
+        playerTurn = 3;
         System.out.println("Player three will play next turn");
 
-      } else if (player == 3) {
+      } else if (playerTurn == 3) {
 
-        int next = threePos + nextNum;
+        int next = playerThreePosition + nextNum;
 
         if (next > 100) {
-          System.out.println("Player three needs to score exactly " + (100 - threePos) + " on dice roll to win. Passing chance.");
-          skip = true;
+          System.out.println("Player three needs to score exactly " + (100 - playerThreePosition) + " on dice roll to win. Passing chance.");
+          skipTurn = true;
         }
 
         if (next == 100) {
@@ -136,38 +136,38 @@ public class Main {
           System.exit(1);
         }
 
-        if (threePos == 0 && nextNum != 6) {
+        if (playerThreePosition == 0 && nextNum != 6) {
           System.out.println("Player three did not score 6. First a 6 needs to be scored to start moving on board.");
-          skip = true;
+          skipTurn = true;
         }
 
-        if (snkPos.get(next) != null) {
+        if (snakePositions.get(next) != null) {
           System.out.println("Player got bit by snake a position " + next);
-          threePos = snkPos.get(next);
-          skip = true;
+          playerThreePosition = snakePositions.get(next);
+          skipTurn = true;
         }
 
-        if (ldrPos.get(next) != null) {
+        if (ladderPositions.get(next) != null) {
           System.out.println("Player got chanced upon a ladder at position " + next + "!");
-          threePos = ldrPos.get(next);
-          skip = true;
+          playerThreePosition = ladderPositions.get(next);
+          skipTurn = true;
         }
 
-        if (!skip) {
-          threePos = next;
+        if (!skipTurn) {
+          playerThreePosition = next;
         }
-        System.out.println("Next position for player three is " + threePos);
-        skip = false;
-        player = 4;
+        System.out.println("Next position for player three is " + playerThreePosition);
+        skipTurn = false;
+        playerTurn = 4;
         System.out.println("Player four will play next turn");
 
-      } else if (player == 4) {
+      } else if (playerTurn == 4) {
 
-        int next = fourPos + nextNum;
+        int next = playerFourPosition + nextNum;
 
         if (next > 100) {
-          System.out.println("Player four needs to score exactly " + (100 - fourPos) + " on dice roll to win. Passing chance.");
-          skip = true;
+          System.out.println("Player four needs to score exactly " + (100 - playerFourPosition) + " on dice roll to win. Passing chance.");
+          skipTurn = true;
         }
 
         if (next == 100) {
@@ -175,29 +175,29 @@ public class Main {
           System.exit(1);
         }
 
-        if (fourPos == 0 && nextNum != 6) {
+        if (playerFourPosition == 0 && nextNum != 6) {
           System.out.println("Player four did not score 6. First a 6 needs to be scored to start moving on board.");
-          skip = true;
+          skipTurn = true;
         }
 
-        if (snkPos.get(next) != null) {
+        if (snakePositions.get(next) != null) {
           System.out.println("Player got bit by snake a position " + next);
-          fourPos = snkPos.get(next);
-          skip = true;
+          playerFourPosition = snakePositions.get(next);
+          skipTurn = true;
         }
 
-        if (ldrPos.get(next) != null) {
+        if (ladderPositions.get(next) != null) {
           System.out.println("Player got chanced upon a ladder at position " + next + "!");
-          fourPos = ldrPos.get(next);
-          skip = true;
+          playerFourPosition = ladderPositions.get(next);
+          skipTurn = true;
         }
 
-        if (!skip) {
-          fourPos = next;
+        if (!skipTurn) {
+          playerFourPosition = next;
         }
-        System.out.println("Next position for player four is " + fourPos);
-        skip = false;
-        player = 1;
+        System.out.println("Next position for player four is " + playerFourPosition);
+        skipTurn = false;
+        playerTurn = 1;
         System.out.println("Player one will play next turn");
       }
 
