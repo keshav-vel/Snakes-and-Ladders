@@ -6,10 +6,10 @@ import java.util.Map;
 public class SnakesAndLadders {
 
   public static void main(String[] args) {
-    new SnakesAndLadders().run();
+    new SnakesAndLadders().run(new RandomDie());
   }
 
-  private void run() {
+  public void run(GameDie die) {
     //declare variables
     String[][] board = new String[10][10];
     Map<Integer, Integer> snakePositions = new HashMap<Integer, Integer>() {
@@ -46,7 +46,7 @@ public class SnakesAndLadders {
     //continue to play the game until it is over
     while (true) {
 
-      int dieRoll = RandomDie.getDieRoll();
+      int dieRoll = die.roll();
       System.out.println("Player " + playerTurn + " got dice roll of " + dieRoll);
 
       if (playerTurn == 1) {
@@ -205,7 +205,6 @@ public class SnakesAndLadders {
         playerTurn = 1;
         System.out.println("Player one will play next turn");
       }
-
     }
   }
 }
