@@ -42,39 +42,38 @@ public class SnakesAndLadders {
     int playerOnePosition = 0, playerTwoPosition = 0, playerThreePosition = 0, playerFourPosition = 0;
     boolean skipTurn = false;
 
-
-    //continue to play the game until it is over
+    
     while (true) {
 
       int dieRoll = die.roll();
-      System.out.println("Player " + playerTurn + " got dice roll of " + dieRoll);
+      TerminalLogger.log("Player " + playerTurn + " got dice roll of " + dieRoll);
 
       if (playerTurn == 1) {
         int nextPosition = playerOnePosition + dieRoll;
 
         if (nextPosition > 100) {
-          System.out.println("Player one needs to score exactly " + (100 - playerOnePosition) + " on dice roll to win. Passing chance.");
+          TerminalLogger.log("Player one needs to score exactly " + (100 - playerOnePosition) + " on dice roll to win. Passing chance.");
           skipTurn = true;
         }
 
         if (nextPosition == 100) {
-          System.out.println("Player one wins! Game finished.");
+          TerminalLogger.log("Player one wins! Game finished.");
           System.exit(1);
         }
 
         if (playerOnePosition == 0 && dieRoll != 6) {
-          System.out.println("Player one did not score 6. First a 6 needs to be scored to start moving on board.");
+          TerminalLogger.log("Player one did not score 6. First a 6 needs to be scored to start moving on board.");
           skipTurn = true;
         }
 
         if (snakePositions.get(nextPosition) != null) {
-          System.out.println("Player got bit by snake a position " + nextPosition);
+          TerminalLogger.log("Player got bit by snake a position " + nextPosition);
           playerOnePosition = snakePositions.get(nextPosition);
           skipTurn = true;
         }
 
         if (ladderPositions.get(nextPosition) != null) {
-          System.out.println("Player got chanced upon a ladder at position " + nextPosition + "!");
+          TerminalLogger.log("Player got chanced upon a ladder at position " + nextPosition + "!");
           playerOnePosition = ladderPositions.get(nextPosition);
           skipTurn = true;
         }
@@ -83,38 +82,38 @@ public class SnakesAndLadders {
           playerOnePosition = nextPosition;
         }
 
-        System.out.println("Next position for player one is " + playerOnePosition);
+        TerminalLogger.log("Next position for player one is " + playerOnePosition);
         skipTurn = false;
         playerTurn = 2;
-        System.out.println("Player two will play next turn");
+        TerminalLogger.log("Player two will play next turn");
 
       } else if (playerTurn == 2) {
 
         int next = playerTwoPosition + dieRoll;
 
         if (next > 100) {
-          System.out.println("Player two needs to score exactly " + (100 - playerTwoPosition) + " on dice roll to win. Passing chance.");
+          TerminalLogger.log("Player two needs to score exactly " + (100 - playerTwoPosition) + " on dice roll to win. Passing chance.");
           skipTurn = true;
         }
 
         if (next == 100) {
-          System.out.println("Player two wins! Game finished.");
+          TerminalLogger.log("Player two wins! Game finished.");
           System.exit(1);
         }
 
         if (playerTwoPosition == 0 && dieRoll != 6) {
-          System.out.println("Player two did not score 6. First a 6 needs to be scored to start moving on board.");
+          TerminalLogger.log("Player two did not score 6. First a 6 needs to be scored to start moving on board.");
           skipTurn = true;
         }
 
         if (snakePositions.get(next) != null) {
-          System.out.println("Player got bit by snake a position " + next);
+          TerminalLogger.log("Player got bit by snake a position " + next);
           playerTwoPosition = snakePositions.get(next);
           skipTurn = true;
         }
 
         if (ladderPositions.get(next) != null) {
-          System.out.println("Player got chanced upon a ladder at position " + next + "!");
+          TerminalLogger.log("Player got chanced upon a ladder at position " + next + "!");
           playerTwoPosition = ladderPositions.get(next);
           skipTurn = true;
         }
@@ -122,38 +121,38 @@ public class SnakesAndLadders {
         if (!skipTurn) {
           playerTwoPosition = next;
         }
-        System.out.println("Next position for player two is " + playerTwoPosition);
+        TerminalLogger.log("Next position for player two is " + playerTwoPosition);
         skipTurn = false;
         playerTurn = 3;
-        System.out.println("Player three will play next turn");
+        TerminalLogger.log("Player three will play next turn");
 
       } else if (playerTurn == 3) {
 
         int next = playerThreePosition + dieRoll;
 
         if (next > 100) {
-          System.out.println("Player three needs to score exactly " + (100 - playerThreePosition) + " on dice roll to win. Passing chance.");
+          TerminalLogger.log("Player three needs to score exactly " + (100 - playerThreePosition) + " on dice roll to win. Passing chance.");
           skipTurn = true;
         }
 
         if (next == 100) {
-          System.out.println("Player three wins! Game finished.");
+          TerminalLogger.log("Player three wins! Game finished.");
           System.exit(1);
         }
 
         if (playerThreePosition == 0 && dieRoll != 6) {
-          System.out.println("Player three did not score 6. First a 6 needs to be scored to start moving on board.");
+          TerminalLogger.log("Player three did not score 6. First a 6 needs to be scored to start moving on board.");
           skipTurn = true;
         }
 
         if (snakePositions.get(next) != null) {
-          System.out.println("Player got bit by snake a position " + next);
+          TerminalLogger.log("Player got bit by snake a position " + next);
           playerThreePosition = snakePositions.get(next);
           skipTurn = true;
         }
 
         if (ladderPositions.get(next) != null) {
-          System.out.println("Player got chanced upon a ladder at position " + next + "!");
+          TerminalLogger.log("Player got chanced upon a ladder at position " + next + "!");
           playerThreePosition = ladderPositions.get(next);
           skipTurn = true;
         }
@@ -161,38 +160,38 @@ public class SnakesAndLadders {
         if (!skipTurn) {
           playerThreePosition = next;
         }
-        System.out.println("Next position for player three is " + playerThreePosition);
+        TerminalLogger.log("Next position for player three is " + playerThreePosition);
         skipTurn = false;
         playerTurn = 4;
-        System.out.println("Player four will play next turn");
+        TerminalLogger.log("Player four will play next turn");
 
       } else if (playerTurn == 4) {
 
         int next = playerFourPosition + dieRoll;
 
         if (next > 100) {
-          System.out.println("Player four needs to score exactly " + (100 - playerFourPosition) + " on dice roll to win. Passing chance.");
+          TerminalLogger.log("Player four needs to score exactly " + (100 - playerFourPosition) + " on dice roll to win. Passing chance.");
           skipTurn = true;
         }
 
         if (next == 100) {
-          System.out.println("Player four wins! Game finished.");
+          TerminalLogger.log("Player four wins! Game finished.");
           System.exit(1);
         }
 
         if (playerFourPosition == 0 && dieRoll != 6) {
-          System.out.println("Player four did not score 6. First a 6 needs to be scored to start moving on board.");
+          TerminalLogger.log("Player four did not score 6. First a 6 needs to be scored to start moving on board.");
           skipTurn = true;
         }
 
         if (snakePositions.get(next) != null) {
-          System.out.println("Player got bit by snake a position " + next);
+          TerminalLogger.log("Player got bit by snake a position " + next);
           playerFourPosition = snakePositions.get(next);
           skipTurn = true;
         }
 
         if (ladderPositions.get(next) != null) {
-          System.out.println("Player got chanced upon a ladder at position " + next + "!");
+          TerminalLogger.log("Player got chanced upon a ladder at position " + next + "!");
           playerFourPosition = ladderPositions.get(next);
           skipTurn = true;
         }
@@ -200,10 +199,10 @@ public class SnakesAndLadders {
         if (!skipTurn) {
           playerFourPosition = next;
         }
-        System.out.println("Next position for player four is " + playerFourPosition);
+        TerminalLogger.log("Next position for player four is " + playerFourPosition);
         skipTurn = false;
         playerTurn = 1;
-        System.out.println("Player one will play next turn");
+        TerminalLogger.log("Player one will play next turn");
       }
     }
   }
