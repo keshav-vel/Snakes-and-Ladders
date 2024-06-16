@@ -2,7 +2,6 @@ package app.src.main;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class SnakesAndLadders {
 
@@ -47,7 +46,7 @@ public class SnakesAndLadders {
     //continue to play the game until it is over
     while (true) {
 
-      int dieRoll = getDieRoll();
+      int dieRoll = RandomDie.getDieRoll();
       System.out.println("Player " + playerTurn + " got dice roll of " + dieRoll);
 
       if (playerTurn == 1) {
@@ -209,11 +208,4 @@ public class SnakesAndLadders {
 
     }
   }
-
-  //throw number at random
-  private static Integer getDieRoll() {
-    Random rand = new Random();
-    return rand.nextInt(6) + 1;
-  }
-
 }
