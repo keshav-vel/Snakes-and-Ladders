@@ -1,4 +1,4 @@
-package app.src.main;
+package app.src.main.logger;
 
 public class TerminalLogger {
     public static void log(String message) {

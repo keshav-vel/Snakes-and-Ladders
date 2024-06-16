@@ -1,6 +1,6 @@
 package app.src.test;
 
-import app.src.main.GameDie;
+import app.src.main.gamedie.GameDie;
 
 class SnakesAndLaddersTest {
 

@@ -1,5 +1,9 @@
 package app.src.main;
 
+import app.src.main.gamedie.GameDie;
+import app.src.main.gamedie.RandomDie;
+import app.src.main.logger.TerminalLogger;
+
 import java.util.HashMap;
 import java.util.Map;
 

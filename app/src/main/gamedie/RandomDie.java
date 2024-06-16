@@ -1,4 +1,4 @@
-package app.src.main;
+package app.src.main.gamedie;
 
 import java.util.Random;
 
