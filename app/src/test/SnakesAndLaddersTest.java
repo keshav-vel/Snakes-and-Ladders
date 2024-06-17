@@ -1,5 +1,6 @@
 package app.src.test;
 
+import app.src.main.Player;
 import app.src.main.SnakesAndLadders;
 import app.src.test.utils.ProgrammableDie;
 import app.src.test.utils.TestLogger;
@@ -17,7 +18,7 @@ class SnakesAndLaddersTest {
         try {
             snakesAndLadders.run(new ProgrammableDie(), testLogger, () -> {
                 throw new RuntimeException("Game Finished");
-            });
+            }, new Player());
             fail("Exception to be thrown!");
         } catch (RuntimeException e) {
             assertEquals("Player four wins! Game finished.", testLogger.messageAt(testLogger.size()-1));
