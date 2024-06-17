@@ -11,10 +11,10 @@ import java.util.Map;
 public class SnakesAndLadders {
 
   public static void main(String[] args) {
-    new SnakesAndLadders().run(new RandomDie(), new TerminalLogger());
+    new SnakesAndLadders().run(new RandomDie(), new TerminalLogger(), new Game());
   }
 
-  public void run(GameDie die, Logger logger) {
+  public void run(GameDie die, Logger logger, GameEvents game) {
     //declare variables
     String[][] board = new String[10][10];
     Map<Integer, Integer> snakePositions = new HashMap<Integer, Integer>() {
@@ -48,6 +48,8 @@ public class SnakesAndLadders {
     boolean skipTurn = false;
 
     while (true) {
+
+
       int dieRoll = die.roll();
       logger.log("Player " + playerTurn + " got dice roll of " + dieRoll);
 
@@ -61,7 +63,7 @@ public class SnakesAndLadders {
 
         if (nextPosition == 100) {
           logger.log("Player one wins! Game finished.");
-          System.exit(1);
+          game.endGame();
         }
 
         if (playerOnePosition == 0 && dieRoll != 6) {
@@ -101,7 +103,7 @@ public class SnakesAndLadders {
 
         if (next == 100) {
           logger.log("Player two wins! Game finished.");
-          System.exit(1);
+          game.endGame();
         }
 
         if (playerTwoPosition == 0 && dieRoll != 6) {
@@ -140,7 +142,7 @@ public class SnakesAndLadders {
 
         if (next == 100) {
           logger.log("Player three wins! Game finished.");
-          System.exit(1);
+          game.endGame();
         }
 
         if (playerThreePosition == 0 && dieRoll != 6) {
@@ -179,7 +181,7 @@ public class SnakesAndLadders {
 
         if (next == 100) {
           logger.log("Player four wins! Game finished.");
-          System.exit(1);
+          game.endGame();
         }
 
         if (playerFourPosition == 0 && dieRoll != 6) {
