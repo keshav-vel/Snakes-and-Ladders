@@ -1,4 +1,4 @@
-package app.src.main;
+package app.src.main.events;
 
 public class Game implements GameEvents {
     public void endGame() {

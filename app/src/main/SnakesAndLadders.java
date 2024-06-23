@@ -1,5 +1,7 @@
 package app.src.main;
 
+import app.src.main.events.Game;
+import app.src.main.events.GameEvents;
 import app.src.main.gamedie.GameDie;
 import app.src.main.gamedie.RandomDie;
 import app.src.main.logger.Logger;

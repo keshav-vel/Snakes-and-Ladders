@@ -1,4 +1,4 @@
-package app.src.main;
+package app.src.main.events;
 
 public interface GameEvents {
     void endGame();
