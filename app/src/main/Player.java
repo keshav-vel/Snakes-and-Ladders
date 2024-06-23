@@ -1,28 +1,28 @@
 package app.src.main;
 
+import app.src.main.events.GameEvents;
 import app.src.main.logger.Logger;
 
 import java.util.Map;
 
 public class Player {
-     int getPlayerPosition(Logger logger, GameEvents game, int playerPosition, int dieRoll, boolean skipTurn, Map<Integer, Integer> snakePositions, Map<Integer, Integer> ladderPositions, String player) {
+    int getPlayerPosition(Logger logger, GameEvents game, int playerPosition, int dieRoll, boolean skipTurn, Map<Integer, Integer> snakePositions, Map<Integer, Integer> ladderPositions, String player) {
+
         int nextPosition = playerPosition + dieRoll;
 
-        if (nextPosition > 100) {
-            logger.log("Player " + player + " needs to score exactly " + (100 - playerPosition) + " on dice roll to win. Passing chance.");
-            skipTurn = true;
+        skipTurn = isFirstRoll6(logger, playerPosition, dieRoll, skipTurn, player);
+        skipTurn = isPositionPast100(logger, playerPosition, skipTurn, player, nextPosition);
+        playerPosition = posAfterChancingUponSnakeOrLadder(logger, playerPosition, skipTurn, snakePositions, ladderPositions, nextPosition);
+
+        if (didPlayerWin(logger, game, player, nextPosition)) {
+            return 100;
         }
 
-        if (nextPosition == 100) {
-            logger.log("Player " + player + " wins! Game finished.");
-            game.endGame();
-        }
+        logger.log("Next position for player " + player + " is " + playerPosition);
+        return playerPosition;
+    }
 
-        if (playerPosition == 0 && dieRoll != 6) {
-            logger.log("Player " + player + " did not score 6. First a 6 needs to be scored to start moving on board.");
-            skipTurn = true;
-        }
-
+    private static int posAfterChancingUponSnakeOrLadder(Logger logger, int playerPosition, boolean skipTurn, Map<Integer, Integer> snakePositions, Map<Integer, Integer> ladderPositions, int nextPosition) {
         if (snakePositions.get(nextPosition) != null) {
             logger.log("Player got bit by snake at position " + nextPosition);
             playerPosition = snakePositions.get(nextPosition);
@@ -35,11 +35,38 @@ public class Player {
             skipTurn = true;
         }
 
+        return movePlayer(playerPosition, skipTurn, nextPosition);
+    }
+
+    private static boolean isFirstRoll6(Logger logger, int playerPosition, int dieRoll, boolean skipTurn, String player) {
+        if (playerPosition == 0 && dieRoll != 6) {
+            logger.log("Player " + player + " did not score 6. First a 6 needs to be scored to start moving on board.");
+            skipTurn = true;
+        }
+        return skipTurn;
+    }
+
+    private static boolean isPositionPast100(Logger logger, int playerPosition, boolean skipTurn, String player, int nextPosition) {
+        if (nextPosition > 100) {
+            logger.log("Player " + player + " needs to score exactly " + (100 - playerPosition) + " on dice roll to win. Passing chance.");
+            skipTurn = true;
+        }
+        return skipTurn;
+    }
+
+    private static int movePlayer(int playerPosition, boolean skipTurn, int nextPosition) {
         if (!skipTurn) {
             playerPosition = nextPosition;
         }
-
-        logger.log("Next position for player " + player + " is " + playerPosition);
         return playerPosition;
+    }
+
+    private static boolean didPlayerWin(Logger logger, GameEvents game, String player, int nextPosition) {
+        if (nextPosition == 100) {
+            logger.log("Player " + player + " wins! Game finished.");
+            game.endGame();
+            return true;
+        }
+        return false;
     }
 }
