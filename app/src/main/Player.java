@@ -1,11 +1,13 @@
 package app.src.main;
 
+import app.src.main.events.Game;
 import app.src.main.events.GameEvents;
 import app.src.main.logger.Logger;
 
 import java.util.Map;
 
 public class Player {
+
     int getPlayerPosition(Logger logger, GameEvents game, int playerPosition, int dieRoll, boolean skipTurn, Map<Integer, Integer> snakePositions, Map<Integer, Integer> ladderPositions, String player) {
 
         int nextPosition = playerPosition + dieRoll;
@@ -14,7 +16,7 @@ public class Player {
         skipTurn = isPositionPast100(logger, playerPosition, skipTurn, player, nextPosition);
         playerPosition = posAfterChancingUponSnakeOrLadder(logger, playerPosition, skipTurn, snakePositions, ladderPositions, nextPosition);
 
-        if (didPlayerWin(logger, game, player, nextPosition)) {
+        if (Game.didPlayerWin(logger, game, player, nextPosition)) {
             return 100;
         }
 
@@ -35,7 +37,7 @@ public class Player {
             skipTurn = true;
         }
 
-        return movePlayer(playerPosition, skipTurn, nextPosition);
+        return Game.movePlayer(playerPosition, skipTurn, nextPosition);
     }
 
     private static boolean isFirstRoll6(Logger logger, int playerPosition, int dieRoll, boolean skipTurn, String player) {
@@ -52,21 +54,5 @@ public class Player {
             skipTurn = true;
         }
         return skipTurn;
-    }
-
-    private static int movePlayer(int playerPosition, boolean skipTurn, int nextPosition) {
-        if (!skipTurn) {
-            playerPosition = nextPosition;
-        }
-        return playerPosition;
-    }
-
-    private static boolean didPlayerWin(Logger logger, GameEvents game, String player, int nextPosition) {
-        if (nextPosition == 100) {
-            logger.log("Player " + player + " wins! Game finished.");
-            game.endGame();
-            return true;
-        }
-        return false;
     }
 }
